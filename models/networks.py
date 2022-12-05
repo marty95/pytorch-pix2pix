@@ -529,6 +529,11 @@ class UnetSkipConnectionBlock(nn.Module):
 
         self.model = nn.Sequential(*model)
 
+    '''
+    Notice that we don't add skip connections from the input to the output layer, 
+    This may be because we could simply learn to kkep the image and drop everything else
+    performing a deterministic transformation.
+    '''
     def forward(self, x):
         if self.outermost:
             return self.model(x)
