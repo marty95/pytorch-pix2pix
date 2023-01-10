@@ -18,6 +18,7 @@ See options/base_options.py and options/train_options.py for more training optio
 See training and test tips at: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/tips.md
 See frequently asked questions at: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/qa.md
 """
+import math
 import time
 from options.train_options import TrainOptions
 from data import create_dataset
@@ -98,7 +99,7 @@ if __name__ == '__main__':
             for category in losses.keys():
                 loss_summary[category] += (losses[category] / test_dataset_size)
 
-            if i % 25 == 0:  # save images to an HTML file
+            if i % math.floor(test_dataset_size/3) == 0:  # save images to an HTML file
                 visuals = model.get_current_visuals()  # get image results
                 img_path = model.get_image_paths()  # get image paths
                 print('processing (%04d)-th image... %s' % (i, img_path))
